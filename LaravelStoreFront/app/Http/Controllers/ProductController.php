@@ -33,4 +33,19 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
+    public function cart()
+    {
+        $cart = session()->get('cart', []);
+        return view('products.cart', compact('cart'));
+    }
+    public function addToCart(Product $product)
+    {
+        $cart = session()->get('cart', []);
+        $cart[$product->id] = [
+            'product' => $product,
+            'quantity' => 1
+        ];
+        session()->put('cart', $cart);
+        return redirect()->route('products.cart')->with('success', 'Product added to cart successfully.');
+    }
 }

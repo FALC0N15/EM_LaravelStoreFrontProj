@@ -17,3 +17,5 @@ Route::get("/add-products", [ProductController::class, 'create'])->name('product
 Route::get("/add-categories", [CategoryController::class, 'create'])->name('categories.create');
 Route::post("/add-products", [ProductController::class, 'store'])->name('products.store');
 Route::post("/add-categories", [CategoryController::class, 'store'])->name('categories.store');
+Route::get("/cart", [ProductController::class, 'cart'])->name('products.cart');
+route::post("/add-to-cart/{product}", [ProductController::class, 'addToCart'])->name('products.addToCart');

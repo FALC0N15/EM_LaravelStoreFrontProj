@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title class=".uppercase font-bold">{{ config('app.name') }} - @yield('title', 'Store')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
     <nav>
-        <a class="text-xl font bold" href="{{ route('products.index') }}">Shop</a>
+                <a href="{{ route('products.index') }}" class="btn btn-secondary .text-blue-500">View All Products</a>
+        <a href="{{ route('categories.index') }}" class="btn btn-secondary .text-blue-500">View All Categories</a>
     </nav>
 
     <main class="container mx-auto py-4">
@@ -21,6 +21,6 @@
     <footer>
         <p>&copy; {{ date('Y') }} {{ config('app.name') }}</p>
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

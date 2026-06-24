@@ -5,11 +5,9 @@
     <div class="hero-section text-center py-5">
         <h1 class="display-4">The Mart</h1>
         <p class="lead">Discover amazing products at great prices</p>
-        <a href="{{ route('products.index') }}" class="btn btn-primary btn-lg">Shop Now</a>
+        <a href="{{route('products.cart')}}" class="btn btn-primary btn-lg">View Cart</a>
     </div>
     <div class="button-section mt-5">
-        <a href="{{ route('products.index') }}" class="btn btn-secondary .text-blue-500">View All Products</a>
-        <a href="{{ route('categories.index') }}" class="btn btn-secondary .text-blue-500">View All Categories</a>
         <a href="{{ route('products.create') }}" class="btn btn-secondary .text-blue-500">Add New Product</a>
         <a href="{{ route('categories.create') }}" class="btn btn-secondary .text-blue-500">Add New Category</a>
     </div>
