@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
-
+Use App\Models\User;
+Use App\Models\CartItem;
 class ProductController extends Controller
 {
     // GET /products
@@ -33,19 +34,19 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
-    public function cart()
+    public function cart(User $user)
     {
-        $cart = session()->get('cart', []);
+        $cart = CartItem::where('user_id', $user->id)->get();
         return view('products.cart', compact('cart'));
     }
-    public function addToCart(Product $product)
+    public function addToCart(User $user, Product $product)
     {
-        $cart = session()->get('cart', []);
+        $cart = CartItem::where('user_id', $user->id)->get()->keyBy('product_id')->toArray();
         $cart[$product->id] = [
             'product' => $product,
             'quantity' => 1
         ];
         session()->put('cart', $cart);
-        return redirect()->route('products.cart')->with('success', 'Product added to cart successfully.');
+        return redirect()->route('products.cart', ['user' => $user->id])->with('success', 'Product added to cart successfully.');
     }
 }

@@ -13,14 +13,14 @@
     </div>
     <div class="categories-section mt-5">
         <h2>Categories</h2>
-        <div class="row">
+        <div class="row g-4">
             @forelse($categories ?? [] as $category)
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $category->category_name }}</h5>
                             <p class="card-text">{{ $category->category_description }}</p>
-
+                        </div>
                     </div>
                 </div>
             @empty

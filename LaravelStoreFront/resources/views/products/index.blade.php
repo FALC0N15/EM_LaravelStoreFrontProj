@@ -9,7 +9,7 @@
     @foreach($products as $product)
         <tr>
             <td>{{ $product->product_name }}</td>
-            <td><a href="{{route('products.addToCart', $product->id)}}" class="btn btn-primary">Add to Cart</a></td>
+            <td><a href="{{route('products.addToCart', ['user' => $user->id, 'product' => $product->id])}}" class="btn btn-primary">Add to Cart</a></td>
         </tr>
     @endforeach
 </table>
