@@ -4,12 +4,8 @@
 <div class="container">
     <div class="hero-section text-center py-5">
         <h1 class="display-4">The Mart</h1>
+        <h2 class="h2"> welcome {{ Auth::user()->name ?? 'Guest' }}</h2>
         <p class="lead">Discover amazing products at great prices</p>
-        <a href="{{route('products.cart')}}" class="btn btn-primary btn-lg">View Cart</a>
-    </div>
-    <div class="button-section mt-5">
-        <a href="{{ route('products.create') }}" class="btn btn-secondary .text-blue-500">Add New Product</a>
-        <a href="{{ route('categories.create') }}" class="btn btn-secondary .text-blue-500">Add New Category</a>
     </div>
     <div class="categories-section mt-5">
         <h2>Categories</h2>

@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 Use App\Models\User;
 Use App\Models\CartItem;
+use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     // GET /products
@@ -36,17 +37,37 @@ class ProductController extends Controller
     }
     public function cart(User $user)
     {
-        $cart = CartItem::where('user_id', $user->id)->get();
+        $cart = CartItem::with('product')->where('user_id', Auth::user()->id)->get();
         return view('products.cart', compact('cart'));
     }
     public function addToCart(User $user, Product $product)
     {
-        $cart = CartItem::where('user_id', $user->id)->get()->keyBy('product_id')->toArray();
-        $cart[$product->id] = [
-            'product' => $product,
-            'quantity' => 1
-        ];
-        session()->put('cart', $cart);
-        return redirect()->route('products.cart', ['user' => $user->id])->with('success', 'Product added to cart successfully.');
+         $cartItem = CartItem::where('user_id', Auth::user()->id)
+        ->where('product_id', $product->id)
+        ->first();
+
+        if ($cartItem) {
+            $cartItem->increment('quantity');
+        } else {
+            CartItem::create([
+                'user_id'    => Auth::user()->id,
+                'product_id' => $product->id,
+                'price'      => $product->product_price,
+                'quantity'   => 1,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Product added to cart successfully.');
+    }
+    public function removeFromCart(CartItem $cartItem)
+    {
+    // make sure users can only delete their own cart items
+        if ($cartItem->user_id !== Auth::id()) {
+            abort(403);
+            }
+
+            $cartItem->delete();
+
+        return redirect()->route('products.cart')->with('success', 'Item removed from cart.');
     }
 }

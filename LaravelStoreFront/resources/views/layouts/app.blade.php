@@ -12,6 +12,22 @@
     <nav>
                 <a href="{{ route('products.index') }}" class="btn btn-secondary .text-blue-500">View All Products</a>
         <a href="{{ route('categories.index') }}" class="btn btn-secondary .text-blue-500">View All Categories</a>
+
+        @guest
+        <a href="{{route('login')}}" class="btn btn-secondary .text-blue-500">Login</a>
+        <a href="{{route('register')}}" class="btn btn-secondary .text-blue-500">Register</a>
+        @endguest
+        @auth
+          @can('admin')
+        <a href="{{ route('products.create') }}" class="btn btn-success">Add Product</a>
+        <a href="{{ route('categories.create') }}" class="btn btn-success">Add Category</a>
+        @endcan
+        <a href="{{ route('products.cart') }}" class="btn btn-secondary .text-blue-500">View Cart</a>
+        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+            @csrf
+            <button type="submit" class="btn btn-secondary .text-blue-500">Logout</button>
+        </form>
+        @endauth
     </nav>
 
     <main class="container mx-auto py-4">
