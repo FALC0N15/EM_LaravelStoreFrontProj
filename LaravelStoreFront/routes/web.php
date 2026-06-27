@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome', compact('categories', 'featured_products'));
 })-> name('welcome');
 Route::get("/products", [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get("/categories", [CategoryController::class, 'index'])->name('categories.index');
 
 Route::middleware(['auth', 'can:admin'])->group(function () {

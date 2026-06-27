@@ -70,4 +70,8 @@ class ProductController extends Controller
 
         return redirect()->route('products.cart')->with('success', 'Item removed from cart.');
     }
+    public function show(Product $product)
+    {
+        return view('products.show', compact('product'));
+    }
 }
