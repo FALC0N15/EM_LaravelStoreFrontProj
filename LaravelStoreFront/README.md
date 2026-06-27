@@ -12,3 +12,13 @@ Steps:
 6. user authentication
 7. left for future feature
 Note: AI agent involvement will be for scafolding, debugging and filling in knowledge gaps
+
+
+Set up instructions:
+1. clone project
+2. open the project in an admin command prompt
+3. run PHP artisan migrate
+4. run PHP artisan serve
+5. open a seperate admin command prompt in the folder
+6. in the second command prompt run npm run dev
+TODO - add commands, requests and testing
