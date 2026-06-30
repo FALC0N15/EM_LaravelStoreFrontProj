@@ -60,7 +60,7 @@
 
         <div class="d-flex gap-2 mt-3">
             <a href="{{ route('products.index') }}" class="btn btn-secondary">Continue Shopping</a>
-            <a href="#" class="btn btn-success">Checkout</a>
+            <a href="{{ route('checkout') }}" class="btn btn-success">Checkout</a>
         </div>
     @endif
 </div>

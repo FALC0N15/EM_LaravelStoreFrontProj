@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('shipping_address');
             $table->string('billing_address');
             $table->integer('order_quantity')->default(0);
+            $table->string('stripe_session_id')->nullable();
             $table->timestamps();
         });
     }

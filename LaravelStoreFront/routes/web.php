@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
+use App\Http\Controllers\CheckoutController;
 Route::get('/', function () {
     $categories = Category::all();
     $featured_products = Product::inRandomOrder()->take(4)->get();
@@ -17,6 +18,7 @@ Route::get('/', function () {
 Route::get("/products", [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get("/categories", [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 
 Route::middleware(['auth', 'can:admin'])->group(function () {
     Route::get("/add-products", [ProductController::class, 'create'])->middleware('auth')->name('products.create');
@@ -29,7 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::post("/add-to-cart/{product}", [ProductController::class, 'addToCart'])->name('products.addToCart');
     Route::delete('/cart/remove/{cartItem}', [ProductController::class, 'removeFromCart'])->name('cart.remove');
 });
-
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+});
 
 
 Route::middleware('auth')->group(function () {
